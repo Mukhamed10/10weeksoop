@@ -43,6 +43,13 @@ public class Doctor {
     public void setSpecialization(String specialization) {
         Specialization = specialization;
     }
+    public boolean isExperienced() {
+        return Age >= 40;
+    }
+    public boolean isRetired() {
+        return Age <= 65;
+    }
+
     @Override
     public String toString(){
         return "id: "+ id + "Name: " + name + " Age: " + Age + " Specialization: " + Specialization;

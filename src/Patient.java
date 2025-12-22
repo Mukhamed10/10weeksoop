@@ -45,6 +45,9 @@ public class Patient {
     public boolean isAdult() {
         return age >= 18;
     }
+    public boolean isOld() {
+        return age <= 80;
+    }
 
 
     @Override

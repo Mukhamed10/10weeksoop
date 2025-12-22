@@ -25,7 +25,18 @@ public class demo {
         appointment1.setStatus("Completed");
         System.out.println("Updated appointment: " + appointment1);
 
-        System.out.println("Is patient 1 adult? " + patient1.isAdult());
+        System.out.println("Doctor is experienced: " + doctor1.isExperienced());
+        System.out.println("Doctor is retired: " + doctor1.isRetired());
+
+        appointment1.confirmAppointment();
+        System.out.println("Appointment status: " + appointment1.getStatus());
+
+        appointment1.cancelAppointment();
+        System.out.println("Appointment status: " + appointment1.getStatus());
+
+        System.out.println("Patient is adult: " + patient1.isAdult());
+        System.out.println("Patient is old: " + patient1.isOld());
+
 
     }
 }

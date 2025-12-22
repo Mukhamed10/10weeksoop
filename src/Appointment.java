@@ -51,6 +51,13 @@ public class Appointment {
     public String getStatus() {
         return status;
     }
+
+    public void confirmAppointment() {
+        this.status = "Confirmed";}
+
+    public void cancelAppointment() {
+        this.status = "Cancelled";}
+
     @Override
     public String toString(){
         return "id=" + id + ", patient=" + patientName +
