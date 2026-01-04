@@ -27,7 +27,6 @@ public class Appointment {
     public String getDateTime() {
         return dateTime;
     }
-
     public String getStatus() {
         return status;
     }

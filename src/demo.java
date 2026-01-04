@@ -158,7 +158,7 @@ public class demo {
         System.out.print("License number: ");
         int license = scanner.nextInt();
         scanner.nextLine();
-
+        
 
 
         Person newDoctor = new Doctor(id, name, age, gender, spec, license);
