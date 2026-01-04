@@ -1,34 +1,14 @@
 public class Appointment {
     private int id;
-    private String patientName;
-    private String doctorName;
+    private Person patient;
+    private Person doctor;
     private String dateTime;
     private String status;
-    public Appointment(int  id, String patientName, String doctorName, String dateTime, String status) {
+    public Appointment(int id, Person patient, Person doctor, String dateTime, String status) {
         this.id = id;
-        this.patientName = patientName;
-        this.doctorName = doctorName;
+        this.patient = patient;
+        this.doctor = doctor;
         this.dateTime = dateTime;
-        this.status = status;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -36,12 +16,12 @@ public class Appointment {
         return id;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public Person getPatient() {
+        return patient;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public Person getDoctor() {
+        return doctor;
     }
 
     public String getDateTime() {
@@ -52,19 +32,41 @@ public class Appointment {
         return status;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPatient(Person patient) {
+        this.patient = patient;
+    }
+
+    public void setDoctor(Person doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void confirmAppointment() {
         this.status = "Confirmed";}
+
 
     public void cancelAppointment() {
         this.status = "Cancelled";}
 
     @Override
-    public String toString(){
-        return "id=" + id + ", patient=" + patientName +
-                ", doctor=" + doctorName + ", date=" + dateTime +
-                ", status=" + status;
-
+    public String toString() {
+        return "appointmnet #" + id +
+                "  patient: " + patient.getName() + "  doctor: " + doctor.getName() + "  date: " + dateTime +
+                " status: " + status;
     }
-
-
 }
+
+
+
+

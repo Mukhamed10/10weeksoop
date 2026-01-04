@@ -1,59 +1,61 @@
-public class Patient {
-    private int id;
-    private String name;
-    private int age;
+public class Patient extends Person {
     private String diagnosis;
+    private String bloodType;
 
-    public Patient(int id, String name, int age, String diagnosis) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    public Patient(int id, String name, int age, String gender,
+                   String diagnosis, String bloodType) {
+        super(id, name, age, gender);
         this.diagnosis = diagnosis;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
+        this.bloodType = bloodType;
     }
 
     public String getDiagnosis() {
         return diagnosis;
     }
-    public boolean isAdult() {
-        return age >= 18;
-    }
-    public boolean isOld() {
-        return age <= 80;
+
+    public String getBloodType() {
+        return bloodType;
     }
 
+    public void setDiagnosis(String diagnosis) {
+        if (diagnosis != null && !diagnosis.trim().isEmpty()) {
+            this.diagnosis = diagnosis;
+        }
+    }
+
+    public void setBloodType(String bloodType) {
+        if (bloodType != null && !bloodType.trim().isEmpty()) {
+            this.bloodType = bloodType;
+        }
+    }
+
+    @Override
+    public void work() {
+        System.out.println("Patient " + getName() + " is recovering from " + diagnosis);
+    }
 
     @Override
     public String toString() {
-        return "id: "+ id + "Name: " + name + " Age: " + age + " diagnosis: " + diagnosis;
+        return super.toString() + ", Diagnosis: " + diagnosis + ", Blood Type: " + bloodType;
     }
 
+    public boolean needsEmergencyCare() {
+        return diagnosis != null &&
+                (diagnosis.toLowerCase().contains("emergency") ||
+                        diagnosis.toLowerCase().contains("severe"));
+    }
 
+    public boolean needsSurgery() {
+        return diagnosis != null &&
+                diagnosis.toLowerCase().contains("surgery");
+    }
+
+    public String getTreatmentPlan() {
+        if (isChild()) {
+            return "Pediatric treatment for " + getName();
+        } else if (isSenior()) {
+            return "Geriatric treatment for " + getName();
+        }
+        return "Standard treatment for " + getName();
+    }
 }
