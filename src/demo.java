@@ -59,11 +59,11 @@ public class demo {
     }
 
     static void showPolymorphism(ArrayList<Person> people) {
-        System.out.println("\n--- EVERYONE WORKS ---");
+        System.out.println("--- EVERYONE WORKS ---");
         for (Person p : people) {
             p.work();
         }
-        System.out.println("↑ This is POLYMORPHISM!");
+        System.out.println(" This is ");
     }
 
     static void showOnlyPatients(ArrayList<Person> people) {
@@ -92,7 +92,7 @@ public class demo {
         for (Person p : people) {
             if (p instanceof Doctor) {
                 count++;
-                Doctor doctor = (Doctor) p; // Convert Person to Doctor
+                Doctor doctor = (Doctor) p;
                 System.out.println(count + ". " + doctor.getName());
                 System.out.println("   Specialization: " + doctor.getSpecialization());
                 System.out.println("   License: " + doctor.getLicenseNumber());
