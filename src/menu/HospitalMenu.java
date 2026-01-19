@@ -97,7 +97,7 @@ public class HospitalMenu {
 
             } catch (InvalidDataException | InputMismatchException e) {
                 System.out.println("ERROR: " + e.getMessage() + "\nPlease try again.\n");
-                scanner.nextLine(); // очистка буфера
+                scanner.nextLine();
             }
         }
     }
@@ -198,7 +198,7 @@ public class HospitalMenu {
             try {
                 System.out.print(prompt);
                 int value = scanner.nextInt();
-                scanner.nextLine(); // очистка буфера
+                scanner.nextLine();
                 return value;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid number. Try again.");
