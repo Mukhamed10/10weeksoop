@@ -1,8 +1,9 @@
 import menu.HospitalMenu;
+import menu.Menu;
 
 public class Main {
     public static void main(String[] args) {
-        new HospitalMenu().start();
+        Menu menu = new HospitalMenu();
+        menu.run();
     }
 }
-

@@ -7,44 +7,51 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class HospitalMenu {
+public class HospitalMenu implements Menu {
 
-    private final ArrayList<Person> people = new ArrayList<>();
-    private final ArrayList<Appointment> appointments = new ArrayList<>();
-    private final Scanner scanner = new Scanner(System.in);
+    private ArrayList<Person> people;
+    private Scanner scanner;
 
     public HospitalMenu() {
+        people = new ArrayList<>();
+        scanner = new Scanner(System.in);
+
         try {
-            people.add(new Doctor(1, "Dr. Smith", 45, "M", "Surgeon", 1111));
-            people.add(new Patient(2, "Alice", 30, "F", "Flu", "O+"));
-            people.add(new Nurse(3, "Mary", 35, "F"));
+            people.add(new Doctor(1001, "Dr. Ali", 45, "M", "Therapist"));
+            people.add(new Nurse(2001, "Aigerim", 32, "F"));
+            people.add(new Patient(3001, "Arman", 25, "M", "Flu"));
         } catch (InvalidDataException e) {
-            System.out.println("Initialization error: " + e.getMessage());
+            System.out.println("Error initializing test data: " + e.getMessage());
         }
     }
 
-    public void start() {
+
+    @Override
+    public void displayMenu() {
+        System.out.println("""
+                === HOSPITAL MENU ===
+                1. Show all people
+                2. Everyone works
+                3. Add patient
+                4. Add doctor
+                5. Add nurse
+                0. Exit
+                """);
+    }
+
+    @Override
+    public void run() {
         int choice;
 
         do {
-            System.out.println("""
-                    \n=== HOSPITAL MENU ===
-                    1. Show all people
-                    2. Everyone works
-                    3. Add patient
-                    4. Add doctor
-                    5. Add nurse
-                    6. Create appointment
-                    7. Show appointments
-                    0. Exit
-                    """);
+            displayMenu();
+            System.out.print("Choose option: ");
 
-            System.out.print("Choose: ");
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("ERROR: Please enter a valid number.");
+                System.out.println("Please enter a number");
                 scanner.nextLine();
                 choice = -1;
             }
@@ -55,10 +62,8 @@ public class HospitalMenu {
                 case 3 -> addPatient();
                 case 4 -> addDoctor();
                 case 5 -> addNurse();
-                case 6 -> createAppointment();
-                case 7 -> showAppointments();
-                case 0 -> System.out.println("Exiting...");
-                default -> System.out.println("Wrong option!");
+                case 0 -> System.out.println("Program finished");
+                default -> System.out.println("Wrong option");
             }
 
         } while (choice != 0);
@@ -66,9 +71,10 @@ public class HospitalMenu {
 
     private void showAllPeople() {
         if (people.isEmpty()) {
-            System.out.println("No people in the system.");
+            System.out.println("No people in system");
             return;
         }
+
         for (Person p : people) {
             p.showInfo();
         }
@@ -81,159 +87,83 @@ public class HospitalMenu {
     }
 
     private void addPatient() {
-        while (true) {
-            try {
-                int id = readInt("ID: ");
-                String name = readString("Name: ");
-                int age = readInt("Age: ");
-                String gender = readGender("Gender (M/F): ");
-                String diag = readString("Diagnosis: ");
-                String blood = readString("Blood type: ");
+        try {
+            System.out.print("ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
 
-                Patient patient = new Patient(id, name, age, gender, diag, blood);
-                people.add(patient);
-                System.out.println("Patient added successfully!");
-                break;
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-            } catch (InvalidDataException | InputMismatchException e) {
-                System.out.println("ERROR: " + e.getMessage() + "\nPlease try again.\n");
-                scanner.nextLine();
-            }
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Gender (M/F): ");
+            String gender = scanner.nextLine();
+
+            System.out.print("Diagnosis: ");
+            String diagnosis = scanner.nextLine();
+
+            people.add(new Patient(id, name, age, gender, diagnosis));
+            System.out.println("Patient added successfully");
+
+        } catch (InvalidDataException | InputMismatchException e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine();
         }
-
     }
 
     private void addDoctor() {
-        while (true) {
-            try {
-                int id = readInt("ID: ");
-                String name = readString("Name: ");
-                int age = readInt("Age: ");
-                String gender = readGender("Gender (M/F): ");
-                String spec = readString("Specialization: ");
-                int lic = readInt("License number: ");
+        try {
+            System.out.print("ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
 
-                Doctor doctor = new Doctor(id, name, age, gender, spec, lic);
-                people.add(doctor);
-                System.out.println("Doctor added successfully!");
-                break;
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-            } catch (InvalidDataException | InputMismatchException e) {
-                System.out.println("ERROR: " + e.getMessage() + "\nPlease try again.\n");
-                scanner.nextLine();
-            }
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Gender (M/F): ");
+            String gender = scanner.nextLine();
+
+            System.out.print("Specialization: ");
+            String specialization = scanner.nextLine();
+
+            people.add(new Doctor(id, name, age, gender, specialization));
+            System.out.println("Doctor added successfully");
+
+        } catch (InvalidDataException | InputMismatchException e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine();
         }
     }
 
     private void addNurse() {
-        while (true) {
-            try {
-                int id = readInt("ID: ");
-                String name = readString("Name: ");
-                int age = readInt("Age: ");
-                String gender = readGender("Gender (M/F): ");
+        try {
+            System.out.print("ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
 
-                Nurse nurse = new Nurse(id, name, age, gender);
-                people.add(nurse);
-                System.out.println("Nurse added successfully!");
-                break;
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-            } catch (InvalidDataException | InputMismatchException e) {
-                System.out.println("ERROR: " + e.getMessage() + "\nPlease try again.\n");
-                scanner.nextLine();
-            }
-        }
-    }
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine();
 
-    private void createAppointment() {
-        ArrayList<Patient> patients = new ArrayList<>();
-        ArrayList<Doctor> doctors = new ArrayList<>();
+            System.out.print("Gender (M/F): ");
+            String gender = scanner.nextLine();
 
-        for (Person p : people) {
-            if (p instanceof Patient) patients.add((Patient) p);
-            if (p instanceof Doctor) doctors.add((Doctor) p);
-        }
+            people.add(new Nurse(id, name, age, gender));
+            System.out.println("Nurse added successfully");
 
-        if (patients.isEmpty() || doctors.isEmpty()) {
-            System.out.println("Need at least one patient and one doctor");
-            return;
-        }
-
-        System.out.println("Choose patient:");
-        for (int i = 0; i < patients.size(); i++)
-            System.out.println((i + 1) + ". " + patients.get(i).getName());
-        int pIndex = readChoice(patients.size()) - 1;
-
-        System.out.println("Choose doctor:");
-        for (int i = 0; i < doctors.size(); i++)
-            System.out.println((i + 1) + ". " + doctors.get(i).getName());
-        int dIndex = readChoice(doctors.size()) - 1;
-
-        System.out.print("Date & time: ");
-        String date = scanner.nextLine();
-
-        Appointment ap = new Appointment(
-                appointments.size() + 1,
-                patients.get(pIndex),
-                doctors.get(dIndex),
-                date
-        );
-        ap.confirm();
-        appointments.add(ap);
-
-        System.out.println("Appointment created successfully!");
-    }
-
-    private void showAppointments() {
-        if (appointments.isEmpty()) {
-            System.out.println("No appointments");
-            return;
-        }
-        for (Appointment a : appointments) {
-            System.out.println(a);
-        }
-    }
-
-    private int readInt(String prompt) {
-        while (true) {
-            try {
-                System.out.print(prompt);
-                int value = scanner.nextInt();
-                scanner.nextLine();
-                return value;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid number. Try again.");
-                scanner.nextLine();
-            }
-        }
-    }
-
-
-    private String readString(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
-    }
-
-    private String readGender(String prompt) {
-        while (true) {
-            System.out.print(prompt);
-            String g = scanner.nextLine().trim().toUpperCase();
-            if (g.equals("M") || g.equals("F")) return g;
-            System.out.println("Invalid gender. Enter M or F.");
-        }
-    }
-
-    private int readChoice(int max) {
-        while (true) {
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                if (choice >= 1 && choice <= max) return choice;
-                System.out.println("Invalid choice. Enter number between 1 and " + max);
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Enter a number.");
-                scanner.nextLine();
-            }
+        } catch (InvalidDataException | InputMismatchException e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine();
         }
     }
 }

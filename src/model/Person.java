@@ -1,8 +1,8 @@
 package model;
 
 import exceptions.InvalidDataException;
-import interfaces.Worker;
 import interfaces.Printable;
+import interfaces.Worker;
 
 public abstract class Person implements Worker, Printable {
 
@@ -11,14 +11,14 @@ public abstract class Person implements Worker, Printable {
     protected int age;
     protected String gender;
 
-
     public Person(int id, String name, int age, String gender)
             throws InvalidDataException {
+
         if (id <= 0)
             throw new InvalidDataException("ID must be positive");
         if (name == null || name.isEmpty())
             throw new InvalidDataException("Name cannot be empty");
-        if (age < 0 || age > 150)
+        if (age < 0 || age > 120)
             throw new InvalidDataException("Invalid age");
         if (!gender.equals("M") && !gender.equals("F"))
             throw new InvalidDataException("Gender must be M or F");
@@ -29,18 +29,13 @@ public abstract class Person implements Worker, Printable {
         this.gender = gender;
     }
 
-
-    @Override
-    public abstract void doWork();
-
     @Override
     public void showInfo() {
         System.out.println(this);
     }
 
-    public String getName() {
-        return name;
-    }
+    @Override
+    public abstract void doWork();
 
     @Override
     public String toString() {
