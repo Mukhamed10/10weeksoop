@@ -11,9 +11,9 @@ public abstract class Person implements Worker, Printable {
     protected int age;
     protected String gender;
 
+
     public Person(int id, String name, int age, String gender)
             throws InvalidDataException {
-
         if (id <= 0)
             throw new InvalidDataException("ID must be positive");
         if (name == null || name.isEmpty())
@@ -28,6 +28,7 @@ public abstract class Person implements Worker, Printable {
         this.age = age;
         this.gender = gender;
     }
+
 
     @Override
     public abstract void doWork();
