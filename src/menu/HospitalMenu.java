@@ -45,7 +45,7 @@ public class HospitalMenu {
                 scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("ERROR: Please enter a valid number.");
-                scanner.nextLine(); // очистка буфера
+                scanner.nextLine();
                 choice = -1;
             }
 
@@ -100,6 +100,7 @@ public class HospitalMenu {
                 scanner.nextLine();
             }
         }
+
     }
 
     private void addDoctor() {
@@ -206,6 +207,7 @@ public class HospitalMenu {
             }
         }
     }
+
 
     private String readString(String prompt) {
         System.out.print(prompt);
