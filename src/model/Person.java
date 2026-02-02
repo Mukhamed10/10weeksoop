@@ -28,6 +28,16 @@ public abstract class Person implements Worker, Printable {
         this.age = age;
         this.gender = gender;
     }
+    // Add getters if not exist
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public String getGender() { return gender; }
+
+    // Add setters for update functionality
+    public void setName(String name) { this.name = name; }
+    public void setAge(int age) { this.age = age; }
+// Note: id and gender usually shouldn't be changed
 
     @Override
     public void showInfo() {

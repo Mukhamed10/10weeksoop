@@ -1,5 +1,5 @@
 package interfaces;
 
-public interface Worker {
+public interface    Worker {
     void doWork();
 }

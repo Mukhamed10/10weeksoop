@@ -11,6 +11,10 @@ public class Patient extends Person {
         super(id, name, age, gender);
         this.diagnosis = diagnosis;
     }
+    public String getDiagnosis() { return diagnosis; }
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
 
     @Override
     public void doWork() {
