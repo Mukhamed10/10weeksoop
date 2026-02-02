@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class HospitalMenu implements Menu {
     private Scanner scanner;
-    private PersonDAO personDAO;  // NO MORE ArrayList!
+    private PersonDAO personDAO;
 
     public HospitalMenu() {
         this.scanner = new Scanner(System.in);
         this.personDAO = new PersonDAO();
-        // REMOVED: ArrayList initialization
+
     }
 
     @Override
@@ -300,19 +300,8 @@ public class HospitalMenu implements Menu {
         List<Person> people = personDAO.getAllPeople();
         System.out.println("\n=== EVERYONE WORKS (POLYMORPHISM) ===");
         for (Person p : people) {
-            p.doWork();  // Each calls its own doWork() method
+            p.doWork();
         }
         System.out.println("======================================\n");
-    }
+    }}
 
-    // Getters and setters for Person (need to add these to your model classes!)
-    // In Doctor.java:
-    // public void setSpecialization(String specialization) { this.specialization = specialization; }
-
-    // In Patient.java:
-    // public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
-
-    // In Person.java:
-    // public void setName(String name) { this.name = name; }
-    // public void setAge(int age) { this.age = age; }
-}

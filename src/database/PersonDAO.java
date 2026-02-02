@@ -77,6 +77,7 @@ public class PersonDAO {
             }
 
 
+
             resultSet.close();
             statement.close();
             System.out.println(" Retrieved " + people.size() + " people");
@@ -172,6 +173,7 @@ public class PersonDAO {
                 return true;
             }
 
+
         } catch (SQLException e) {
             System.out.println(" Update patient failed: " + e.getMessage());
         } finally {
@@ -179,6 +181,33 @@ public class PersonDAO {
         }
         return false;
     }
+    public boolean updateNurse(Nurse nurse) {
+        String sql = "UPDATE people SET name = ?, age = ?, gender = ? " +
+                "WHERE person_id = ? AND person_type = 'NURSE'";
+        Connection connection = DatabaseConnection.getConnection();
+        if (connection == null) return false;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nurse.getName());
+            statement.setInt(2, nurse.getAge());
+            statement.setString(3, nurse.getGender());
+            statement.setInt(4, nurse.getId());
+            int rowsUpdated = statement.executeUpdate();
+            statement.close();
+            if (rowsUpdated > 0) {
+                System.out.println("Nurse updated: " + nurse.getName());
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Update nurse failed: " + e.getMessage());
+        } finally {
+            DatabaseConnection.closeConnection(connection);
+        }
+
+        return false;
+    }
+
 
     public boolean deletePerson(int personId) {
         String sql = "DELETE FROM people WHERE person_id = ?";
@@ -207,7 +236,7 @@ public class PersonDAO {
         return false;
     }
 
-    // ==================== SEARCH (WEEK 8) ====================
+
     public List<Person> searchByName(String name) {
         List<Person> people = new ArrayList<>();
         String sql = "SELECT * FROM people WHERE name ILIKE ? ORDER BY name";

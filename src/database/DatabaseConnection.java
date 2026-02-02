@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    // ⚠️ ИЗМЕНИ на "hospital_db" (так называется твоя база на скриншоте)
+
     private static final String URL = "jdbc:postgresql://localhost:5432/hospital_db";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "12345678"; // твой пароль
+    private static final String PASSWORD = "12345678";
 
     public static Connection getConnection() {
         try {
@@ -31,9 +31,9 @@ public class DatabaseConnection {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println("🔒 Connection closed");
+                System.out.println(" Connection closed");
             } catch (SQLException e) {
-                System.out.println("⚠️ Error closing connection");
+                System.out.println(" Error closing connection");
             }
         }
     }
